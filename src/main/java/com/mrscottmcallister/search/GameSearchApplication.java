@@ -2,7 +2,6 @@ package com.mrscottmcallister.search;
 
 import com.mrscottmcallister.search.resource.GameResource;
 import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 /**
