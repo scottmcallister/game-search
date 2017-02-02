@@ -1,0 +1,4 @@
+elasticsearch:
+  clusterName: elasticsearch
+  servers:
+  - 'http://localhost:9200'

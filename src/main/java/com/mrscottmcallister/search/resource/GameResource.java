@@ -15,9 +15,8 @@ public class GameResource {
     public GameResource(){}
 
     @GET
-    public Map<String, String> getGame(@QueryParam("name") String name) {
-        Map<String, String> result = new HashMap<String, String>();
-        result.put("message", "Hello " + name);
+    public Game getGame(@QueryParam("name") String name) {
+        Game result = new Game();
         return result;
     }
 }

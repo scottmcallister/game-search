@@ -16,6 +16,8 @@ public class Game {
     int release_month;
     int release_day;
 
+    public Game(){ }
+
     public int getId() {
         return id;
     }

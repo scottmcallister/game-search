@@ -2,32 +2,48 @@ package com.mrscottmcallister.search;
 
 import com.mrscottmcallister.search.resource.GameResource;
 import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
-
-import java.net.InetAddress;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by smcallister on 2017-01-28.
  */
 public class GameSearchApplication extends Application<GameSearchConfiguration> {
-    public static void main(String[] args) throws Exception{
+    private static final Logger logger = LoggerFactory.getLogger(GameSearchConfiguration.class);
+    private JestClient jestClient;
+
+    public static void main(String[] args) throws Exception {
         new GameSearchApplication().run(args);
+    }
+
+    public JestClient getJestClient() {
+        return jestClient;
     }
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "dropwizard-elastic";
     }
 
-    public void run(GameSearchConfiguration configuration, Environment environment) throws Exception {
-        // nothing yet...
-        final GameResource resource = new GameResource();
-        environment.jersey().register(resource);
-        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
-                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+    @Override
+    public void initialize(Bootstrap<GameSearchConfiguration> bootstrap) {
+        JestClientFactory factory = new JestClientFactory();
+        factory.setHttpClientConfig(new HttpClientConfig
+                .Builder("http://localhost:9200")
+                .multiThreaded(true)
+                .build());
+        jestClient = factory.getObject();
+    }
+
+    @Override
+    public void run(GameSearchConfiguration config, Environment environment) throws Exception {
+        logger.info("Running the application");
+        final GameResource gameResource = new GameResource();
+        environment.jersey().register(gameResource);
     }
 }
