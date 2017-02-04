@@ -35,16 +35,15 @@ public class GameDao {
     }
 
     public List<Game> searchByTitle(String title) throws IOException {
-        List<Game> response = new ArrayList<Game>();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchQuery("title", title));
-
         Search search = new Search.Builder(searchSourceBuilder.toString())
-                // multiple index or types can be added.
                 .addIndex("games")
-                .addIndex("game")
+                .addType("game")
                 .build();
         SearchResult results = jestClient.execute(search);
+        results.getJsonObject();
+        List<Game> response = new ArrayList<Game>();
         List<SearchResult.Hit<Game, Void>> hits = results.getHits(Game.class);
         for(SearchResult.Hit hit: hits){
             response.add((Game)hit.source);

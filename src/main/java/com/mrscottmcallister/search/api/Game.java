@@ -1,37 +1,28 @@
 package com.mrscottmcallister.search.api;
 
+import io.searchbox.client.JestResult;
+
 /**
  * Created by smcallister on 2017-01-29.
  */
 public class Game {
-    int id;
-    String score_phrase;
-    String title;
-    String url;
-    String platform;
-    double score;
-    String genre;
-    boolean editors_choice;
-    int release_year;
-    int release_month;
-    int release_day;
+    private String scorePhrase;
+    private String title;
+    private String url;
+    private String platform;
+    private double score;
+    private String genre;
+    private boolean editorsChoice;
+    private int releaseYear;
+    private int releaseMonth;
+    private int releaseDay;
 
-    public Game(){ }
-
-    public int getId() {
-        return id;
+    public String getScorePhrase() {
+        return scorePhrase;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getScore_phrase() {
-        return score_phrase;
-    }
-
-    public void setScore_phrase(String score_phrase) {
-        this.score_phrase = score_phrase;
+    public void setScorePhrase(String scorePhrase) {
+        this.scorePhrase = scorePhrase;
     }
 
     public String getTitle() {
@@ -74,35 +65,35 @@ public class Game {
         this.genre = genre;
     }
 
-    public boolean isEditors_choice() {
-        return editors_choice;
+    public boolean isEditorsChoice() {
+        return editorsChoice;
     }
 
-    public void setEditors_choice(boolean editors_choice) {
-        this.editors_choice = editors_choice;
+    public void setEditorsChoice(boolean editorsChoice) {
+        this.editorsChoice = editorsChoice;
     }
 
-    public int getRelease_year() {
-        return release_year;
+    public int getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setRelease_year(int release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
-    public int getRelease_month() {
-        return release_month;
+    public int getReleaseMonth() {
+        return releaseMonth;
     }
 
-    public void setRelease_month(int release_month) {
-        this.release_month = release_month;
+    public void setReleaseMonth(int releaseMonth) {
+        this.releaseMonth = releaseMonth;
     }
 
-    public int getRelease_day() {
-        return release_day;
+    public int getReleaseDay() {
+        return releaseDay;
     }
 
-    public void setRelease_day(int release_day) {
-        this.release_day = release_day;
+    public void setReleaseDay(int releaseDay) {
+        this.releaseDay = releaseDay;
     }
 }
