@@ -1,5 +1,6 @@
 package com.mrscottmcallister.search;
 
+import com.mrscottmcallister.search.elastic.GameDao;
 import com.mrscottmcallister.search.resource.GameResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 public class GameSearchApplication extends Application<GameSearchConfiguration> {
     private static final Logger logger = LoggerFactory.getLogger(GameSearchConfiguration.class);
     private JestClient jestClient;
+    private GameDao gameDao;
 
     public static void main(String[] args) throws Exception {
         new GameSearchApplication().run(args);
@@ -38,12 +40,13 @@ public class GameSearchApplication extends Application<GameSearchConfiguration> 
                 .multiThreaded(true)
                 .build());
         jestClient = factory.getObject();
+        gameDao = new GameDao(jestClient);
     }
 
     @Override
     public void run(GameSearchConfiguration config, Environment environment) throws Exception {
         logger.info("Running the application");
-        final GameResource gameResource = new GameResource();
+        final GameResource gameResource = new GameResource(gameDao);
         environment.jersey().register(gameResource);
     }
 }

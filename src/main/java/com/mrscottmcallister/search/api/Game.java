@@ -1,4 +1,4 @@
-package com.mrscottmcallister.search.resource;
+package com.mrscottmcallister.search.api;
 
 /**
  * Created by smcallister on 2017-01-29.

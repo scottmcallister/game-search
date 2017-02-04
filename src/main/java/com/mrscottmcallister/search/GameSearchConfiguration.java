@@ -1,8 +1,8 @@
 package com.mrscottmcallister.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.meltmedia.dropwizard.jest.JestConfiguration;
 import io.dropwizard.Configuration;
+import io.searchbox.client.JestClient;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -11,9 +11,9 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class GameSearchConfiguration extends Configuration {
     @JsonProperty
-    protected JestConfiguration elasticsearch;
+    protected JestClient elasticsearch;
 
-    public JestConfiguration getElasticsearch() {
+    public JestClient getElasticsearch() {
         return elasticsearch;
     }
 }
