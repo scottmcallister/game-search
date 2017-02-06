@@ -3,6 +3,7 @@ package com.mrscottmcallister.search;
 import com.mrscottmcallister.search.elastic.GameDao;
 import com.mrscottmcallister.search.resource.GameResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.searchbox.client.JestClient;
@@ -41,12 +42,14 @@ public class GameSearchApplication extends Application<GameSearchConfiguration> 
                 .build());
         jestClient = factory.getObject();
         gameDao = new GameDao(jestClient);
+        bootstrap.addBundle(new AssetsBundle("/ui", "/", "index.html"));
     }
 
     @Override
     public void run(GameSearchConfiguration config, Environment environment) throws Exception {
         logger.info("Running the application");
         final GameResource gameResource = new GameResource(gameDao);
+        environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(gameResource);
     }
 }
