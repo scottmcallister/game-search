@@ -1,7 +1,7 @@
 package com.mrscottmcallister.search;
 
-import com.mrscottmcallister.search.elastic.GameDao;
 import com.mrscottmcallister.search.resource.GameResource;
+import com.mrscottmcallister.search.elastic.GameDao;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
